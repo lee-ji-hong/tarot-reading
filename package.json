@@ -7,13 +7,13 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
-    "@types/react": "^18.2.46",
+    "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "classnames": "^2.5.0",
+    "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "sass": "^1.69.6",
+    "sass": "^1.69.7",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
@@ -22,6 +22,12 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -40,7 +46,6 @@
     "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^6.1.6",
     "@types/testing-library__jest-dom": "^6.0.0",
-    "craco-alias": "^3.0.1",
-    "typings-for-css-modules-loader": "^1.7.0"
+    "craco-alias": "^3.0.1"
   }
 }

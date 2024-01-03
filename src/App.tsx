@@ -6,7 +6,7 @@ const cx = classNames.bind(styles)
 function App() {
   return (
     <div className={cx('container')}>
-      테스트
+      Learn React
     </div>
   );
 }
