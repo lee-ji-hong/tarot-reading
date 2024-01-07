@@ -31,3 +31,6 @@ yarn/*
 !.yarn/sdks
 !.yarn/versions
 .yarn
+
+#API KEY
+.env
