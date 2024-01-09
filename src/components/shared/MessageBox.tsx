@@ -44,14 +44,16 @@ function MessageBox({children,title,}: PropsWithChildren<MessageBoxProps>) {
   return (
     <section className={cx('container')}>
       {title != null ? <div className={cx('txt-title')}>{title}</div> : null}
-      <div className={cx('txt-content')}>
+      {isLoading ? <div className={cx('txt-content')}>로딩 중... 차분한 음악과 함께 기다려봐요.</div> : (
+        <div className={cx('txt-content')}>
         {data?.Interpretation}
-      <TextBox
-        inputValue={inputValue} 
-        onChange={(e) => setInputValue(e.target.value)} 
-        onClick={handleClickAPICall}
-      />
-      </div>
+          <TextBox
+            inputValue={inputValue} 
+            onChange={(e) => setInputValue(e.target.value)} 
+            onClick={handleClickAPICall}
+          />
+        </div>
+      )}
     </section>
   )
 }
