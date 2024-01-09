@@ -22,14 +22,12 @@ function MessageBox({children,title,}: PropsWithChildren<MessageBoxProps>) {
   const [error, setError] = useState(false);
   const endpoint = '/chat/completions'
 
-  console.log(inputValue)
+  // console.log(inputValue)
   
   const handleClickAPICall = async () => {
     try{
       setIsLoading(true);
-      const ment = `안녕 너 이름이 뭐야?
-      `
-      const message = await CallGPT({endpoint:endpoint,prompt:ment});
+      const message = await CallGPT({endpoint:endpoint,prompt:inputValue});
       setData(message)
     } catch (error) {
       setError(true)
