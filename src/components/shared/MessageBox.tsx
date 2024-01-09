@@ -2,6 +2,7 @@ import classNames from 'classnames/bind'
 import styles from './MessageBox.module.scss'
 import React, { useState,PropsWithChildren } from 'react'
 
+import { TarotData } from '@models/tarotData'
 import { CallGPT } from '@/api/gpt'
 const cx = classNames.bind(styles)
 
@@ -15,14 +16,17 @@ interface TextBoxProps {
   onClick?: () => void;
 }
 
+const initialInterpretation = "안녕? 나는 점쟁이라고해. 너의 고민이나 어떤 것이든 들어줄 수 있어. 고민이 뭐야?";
+
 function MessageBox({children,title,}: PropsWithChildren<MessageBoxProps>) {
-  const [data, setData] = useState<string>("안녕? 나는 점쟁이라고해. 너의 고민이나 어떤 것이든 들어줄 수 있어. 고민이 뭐야?");
+  const [data, setData] = useState<TarotData>({ Interpretation: initialInterpretation, title: '', cards: [] });
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const endpoint = '/chat/completions'
 
   // console.log(inputValue)
+  
   
   const handleClickAPICall = async () => {
     try{
@@ -36,11 +40,12 @@ function MessageBox({children,title,}: PropsWithChildren<MessageBoxProps>) {
     }
   }
 
+  console.log(data)
   return (
     <section className={cx('container')}>
       {title != null ? <div className={cx('txt-title')}>{title}</div> : null}
       <div className={cx('txt-content')}>
-        {data}
+        {data?.Interpretation}
       <TextBox
         inputValue={inputValue} 
         onChange={(e) => setInputValue(e.target.value)} 

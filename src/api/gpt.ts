@@ -1,3 +1,4 @@
+import { TarotData } from '@models/tarotData'
 
 const BASE_URL = process.env.REACT_APP_GPT_API_URL as string;
 
@@ -7,7 +8,7 @@ export const CallGPT = async ({
 }: {
   endpoint: string
   prompt: string
-}): Promise<string> => {
+}): Promise<TarotData> => {
   const messages = [
     {
       role: 'system',
@@ -147,6 +148,6 @@ export const CallGPT = async ({
 
   const responseData = await response.json();
   const message = responseData.choices[0].message.content;
-  console.log(message)
-  return message;
+  console.log(JSON.parse(message))
+  return JSON.parse(message);
 };
