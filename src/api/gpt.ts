@@ -1,7 +1,23 @@
 
 const BASE_URL = process.env.REACT_APP_GPT_API_URL as string;
 
-export const CallGPT = async (endpoint: string): Promise<string> => {
+export const CallGPT = async ({
+  endpoint,
+  prompt
+}: {
+  endpoint: string
+  prompt: string
+}): Promise<string> => {
+  const messages = [
+    {
+      role: 'system',
+      content: '테스트 중입니다.',
+    },
+    {
+      role: 'user',
+      content: `${prompt}`
+    },
+  ]
   const response = await fetch(BASE_URL + endpoint, {
     method: 'POST',
     headers: {
@@ -10,12 +26,7 @@ export const CallGPT = async (endpoint: string): Promise<string> => {
     },
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: '안녕',
-        },
-      ],
+      messages
     }),
   });
 

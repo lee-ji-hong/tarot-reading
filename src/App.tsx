@@ -11,17 +11,14 @@ import MessageBox from '@shared/MessageBox'
 const cx = classNames.bind(styles)
 
 function App() {
-  const endpoint = '/chat/completions'
-  // const { isLoading, error, data } = use Query<string>('posts', () => CallGPT(endpoint))
-  // if (isLoading) return <div>Loading...</div>;
+  const [data, setData] = useState<string>("안녕? 나는 점쟁이라고해. 너의 고민이나 어떤 것이든 들어줄 수 있어. 고민이 뭐야?");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const endpoint = '/chat/completions';
 
   return (
     <div className={cx('container')}>
-      {/* {data} */}
-      
-      <MessageBox title='점쟁이'>
-        안녕? 나는 점쟁이라고해. 너의 고민이나 어떤 것이든 들어줄 수 있어. 고민이 뭐야?
-      </MessageBox>
+      <MessageBox title='점쟁이'/>
     </div>
   )
 }
