@@ -1,25 +1,26 @@
 import React from 'react'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 import { CallGPT } from './api/gpt'
 import classNames from 'classnames/bind'
 import styles from './App.modules.scss'
 
+import { Routes } from '@pages/Routes';
 import MessageBox from '@shared/MessageBox'
 
+const queryClient = new QueryClient();
 const cx = classNames.bind(styles)
 
 function App() {
-  const [data, setData] = useState<string>("안녕? 나는 점쟁이라고해. 너의 고민이나 어떤 것이든 들어줄 수 있어. 고민이 뭐야?");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const endpoint = '/chat/completions';
-
   return (
-    <div className={cx('container')}>
-      <MessageBox title='점쟁이'/>
-    </div>
+    <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+    <Routes />
+    </QueryClientProvider>
+  </RecoilRoot>
+    
   )
 }
 
