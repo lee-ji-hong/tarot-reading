@@ -14,9 +14,53 @@
     flex-direction: column;
     align-items: center;
 
-    img {
+    .card {
       width: 100%;
       max-width: 283px;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      /* 자식 요소에 대한 3D 변환 효과를 유지하는 설정 */
+      transition: transform 0.3s;
+      /* 변환 효과에 대한 0.3초의 전환 효과 추가 */
+
+      position: relative;
+    }
+
+    .active {
+      transform: rotateY(180deg);
+      /* 클릭 시 활성화됨. 카드를 180도 회전시킴 */
+    }
+
+    .front,
+    .back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      /* 뒷면 감춤 */
+      position: absolute;
+    }
+
+    .back {
+      transform: rotateY(0deg);
+      z-index: 2;
+
+      /* 앞면에 대한 스타일 및 이미지 설정 */
+      img {
+        width: 100%;
+        max-width: 283px;
+      }
+    }
+
+    .front {
+      transform: rotateY(180deg);
+      /* 초기에는 뒷면이 보이도록 180도 회전시킴 */
+      z-index: 1;
+
+      img {
+        width: 100%;
+        max-width: 283px;
+      }
     }
   }
 }
