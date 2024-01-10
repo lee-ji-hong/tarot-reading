@@ -19,6 +19,9 @@
       ],
       "@pages/*": [
         "src/pages/*"
+      ],
+      "@recoil/*": [
+        "src/recoil/*"
       ]
     }
   }

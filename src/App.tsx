@@ -15,9 +15,9 @@ const cx = classNames.bind(styles)
 
 function App() {
   return (
-    <RecoilRoot>
+  <RecoilRoot>
     <QueryClientProvider client={queryClient}>
-    <Routes />
+      <Routes />
     </QueryClientProvider>
   </RecoilRoot>
     
