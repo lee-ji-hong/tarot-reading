@@ -24,6 +24,7 @@ function ResultPage() {
   console.log(data)
 
   return (
+    <>
     <div className={cx('container')}>
       {cardsData.map((card, idx) => (
         <div
@@ -42,16 +43,19 @@ function ResultPage() {
           </div>
         </div>
       ))}
+      
     </div>
+    <Info data={data}/>
+    </>
   )
 }
 
-function cardInfo(){
+function Info({ data }: { data?: any }) {
   return (
     <div>
-      테스트
+      {data?.Interpretation}
     </div>
-  )
+  );
 }
 
 export default ResultPage
