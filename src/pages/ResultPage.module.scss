@@ -4,5 +4,19 @@
   background-position: center;
   height: 100vh;
 
-  color:white;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+
+  .wrap-image {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 100%;
+      max-width: 283px;
+    }
+  }
 }

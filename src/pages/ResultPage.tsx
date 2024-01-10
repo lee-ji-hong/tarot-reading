@@ -12,11 +12,28 @@ const cx = classNames.bind(styles)
 function ResultPage() {
   const data = useRecoilValue(LuckData);
 
+  const getImagePath = (index: number) => `/assets/images/card${index + 1}.png`;
   console.log(data)
 
   return (
     <div className={cx('container')}>
-      결과페이지
+      {[...Array(3)].map((_, idx) => (
+        <div
+          key={idx}
+          className={cx('wrap-image')}
+          onClick={() => alert('클릭')}
+        >
+          <img src={getImagePath(idx)} alt={`card ${idx + 1}`} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function cardInfo(){
+  return (
+    <div>
+      테스트
     </div>
   )
 }
