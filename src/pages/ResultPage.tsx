@@ -11,7 +11,7 @@ const cx = classNames.bind(styles)
 
 function ResultPage() {
   const data = useRecoilValue(LuckData);
-  const getImagePath = (index: number) => `/assets/images/card${index + 1}.png`;
+  
   const cardsData = data?.cards;
   const [clickedCards, setClickedCards] = useState(Array(cardsData.length).fill(false));
 
@@ -27,26 +27,39 @@ function ResultPage() {
     <>
     <div className={cx('container')}>
       {cardsData.map((card, idx) => (
-        <div
-          key={idx}
-          className={cx('wrap-image')}
-          onClick={() => handleCardClick(idx)}
-        >
-          <div className={cx('card', { active: clickedCards[idx] })}>
-            <div className={cx('front')}>
-              <img src={card?.cardImageUrl} alt={`card ${idx + 1}`} />
-            </div>
-
-            <div className={cx('back')}>
-              <img src={getImagePath(idx)} alt={`card ${idx + 1}`} />
-            </div>
-          </div>
-        </div>
+            <Card key={idx} card={card} index={idx} onClick={() => handleCardClick(idx)} isActive={clickedCards[idx]} />
       ))}
-      
     </div>
     <Info data={data}/>
     </>
+  )
+}
+
+function Card({
+  card,
+  index,
+  onClick,
+  isActive
+}:{
+  card: any
+  index: number
+  onClick: () => void
+  isActive: boolean 
+}){
+  const getImagePath = (index: number) => `/assets/images/card${index + 1}.png`;
+
+  return (
+    <div className={cx('wrap-image')} onClick={onClick}>
+      <div className={cx('card', { active: isActive })}>
+        <div className={cx('front')}>
+          <img src={card?.cardImageUrl} alt={`card ${index + 1}`} />
+        </div>
+
+        <div className={cx('back')}>
+          <img src={getImagePath(index)} alt={`card ${index + 1}`} />
+        </div>
+      </div>
+    </div>
   )
 }
 
