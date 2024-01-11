@@ -58,8 +58,11 @@
       z-index: 1;
 
       img {
-        width: 100%;
-        max-width: 283px;
+        width: 90%;
+        max-width: 263px;
+        border: 10px solid white;
+        border-radius: 16px;
+        margin-top:18px;
       }
     }
   }
