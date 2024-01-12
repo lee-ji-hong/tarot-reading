@@ -70,9 +70,9 @@ function Card({
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
     const left = e.clientX - x
     const top = e.clientY - y
-    const centerX = left - width / 2
-    const centerY = top - height / 2
-    const dot = Math.sqrt(centerX ** 2 + centerY ** 2)
+    const centerX = left - (width / 2)
+    const centerY = top - (height / 2)
+    const dot = Math.sqrt((centerX ** 2) + (centerY ** 2))
     setXY({
       x: x,
       y: y,
@@ -100,7 +100,8 @@ function Card({
       dot: 0,
     })
   }
-  console.log(xy)
+  // console.log(xy)
+  // console.log(-xy?.centerY / 100,xy?.centerX / 100,0,xy?.dot / 8)
   return (
     <div className={cx('wrap-image')} onClick={onClick}>
       <div
@@ -109,44 +110,32 @@ function Card({
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className={cx('front')}
-          style={{
-            transform: `rotate3d(${xy?.centerY / 100}, ${
-              -xy?.centerX / 100
-            }, 0, ${-xy?.dot / 8}deg)`,
-            backgroundImage: `
-            radial-gradient(
-              circle at ${xy?.left}px ${xy?.top}px, #00000040, #ffffff00, #ffffff99
-            )
-          `,
-            boxShadow: `
-          ${-xy.centerX / 5}px ${-xy.centerY / 10}px 10px rgba(0, 0, 0, 0.2)
-          `,
-          }}
-        >
+          className={cx('front')}>
           <img src={card?.cardImageUrl} alt={`card ${index + 1}`} />
         </div>
         <div
           className={cx('back')}
-          style={{
-            transform: `
-        rotate3d(
-          ${-xy?.centerY / 100}, ${xy?.centerX / 100}, 0, ${xy?.dot / 8}deg
-          )
-      `,
-            backgroundImage: `
-        radial-gradient(
-          circle at ${xy?.left}px ${xy?.top}px, #00000040, #ffffff00, #ffffff99
-        )
-      `,
-            boxShadow: `
-      ${-xy.centerX / 5}px ${-xy.centerY / 10}px 10px rgba(0, 0, 0, 0.2)
-      `,
+          style={{            
+            width: '100%', // Make sure to use quotes around percentage values
+            maxWidth: '283px',
+            height: '500px',
+            transform: `rotate3d(${-xy?.centerY / 70}, ${xy?.centerX / 70}, 0,25deg)`,
+            backgroundImage: `            
+            radial-gradient(circle at ${xy?.left}px ${xy?.top}px, #00000040, #ffffff00, #ffffff99),
+            url(${getImagePath(index)})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            // boxShadow: '0 0 10px 2px rgba(0, 0, 0, 0.1)',
+            position: 'relative',
+            transitionDuration: '250ms',
+            transitionProperty: 'transform, box-shadow',
+            transitionTimingFunction: 'ease-out',
+            boxShadow: `${-xy.centerX / 5}px ${-xy.centerY / 10}px 10px rgba(0, 0, 0, 0.2)`,
+            borderRadius: '30px',
           }}
-        >
-          <img src={getImagePath(index)} alt={`card ${index + 1}`} />
+        > 
         </div>
-        <div className={cx('pointer')}></div>
       </div>
     </div>
   )
