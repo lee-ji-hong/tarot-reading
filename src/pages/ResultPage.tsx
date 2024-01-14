@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import classNames from 'classnames/bind'
 import styles from './ResultPage.module.scss'
 import { LuckData } from '@recoil/atom'
-
+import MessageBox from '@shared/MessageBox'
 const cx = classNames.bind(styles)
 
 function ResultPage() {
@@ -70,9 +70,9 @@ function Card({
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
     const left = e.clientX - x
     const top = e.clientY - y
-    const centerX = left - (width / 2)
-    const centerY = top - (height / 2)
-    const dot = Math.sqrt((centerX ** 2) + (centerY ** 2))
+    const centerX = left - width / 2
+    const centerY = top - height / 2
+    const dot = Math.sqrt(centerX ** 2 + centerY ** 2)
     setXY({
       x: x,
       y: y,
@@ -109,19 +109,23 @@ function Card({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <div
-          className={cx('front')}>
+        <div className={cx('front')}>
           <img src={card?.cardImageUrl} alt={`card ${index + 1}`} />
+          <MessageBox title={card.cardName} />
         </div>
         <div
           className={cx('back')}
-          style={{            
+          style={{
             width: '100%', // Make sure to use quotes around percentage values
             maxWidth: '283px',
             height: '500px',
-            transform: `rotate3d(${-xy?.centerY / 70}, ${xy?.centerX / 70}, 0,25deg)`,
+            transform: `rotate3d(${-xy?.centerY / 70}, ${
+              xy?.centerX / 70
+            }, 0,25deg)`,
             backgroundImage: `            
-            radial-gradient(circle at ${xy?.left}px ${xy?.top}px, #00000040, #ffffff00, #ffffff99),
+            radial-gradient(circle at ${xy?.left}px ${
+              xy?.top
+            }px, #00000040, #ffffff00, #ffffff99),
             url(${getImagePath(index)})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
@@ -131,18 +135,22 @@ function Card({
             transitionDuration: '250ms',
             transitionProperty: 'transform, box-shadow',
             transitionTimingFunction: 'ease-out',
-            boxShadow: `${-xy.centerX / 5}px ${-xy.centerY / 10}px 10px rgba(0, 0, 0, 0.2)`,
+            boxShadow: `${-xy.centerX / 5}px ${
+              -xy.centerY / 10
+            }px 10px rgba(0, 0, 0, 0.2)`,
             borderRadius: '30px',
           }}
-        > 
-        </div>
+        ></div>
       </div>
     </div>
   )
 }
 
 function Info({ data }: { data?: any }) {
-  return <div>{data?.Interpretation}</div>
+  return (
+    <MessageBox title="점쟁이" />
+    // <div>{data?.Interpretation}</div>)
+  )
 }
 
 export default ResultPage
