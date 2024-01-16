@@ -21,24 +21,29 @@ function ResultPage() {
     setClickedCards(updatedClickedCards)
   }
 
-  console.log(data)
-  console.log(clickedCards)
-
   return (
-    <>
-      <div className={cx('container')}>
-        {cardsData.map((card, idx) => (
-          <Card
-            key={idx}
-            card={card}
-            index={idx}
-            onClick={() => handleCardClick(idx)}
-            isActive={clickedCards[idx]}
-          />
-        ))}
-      </div>
-      <Info data={data} />
-    </>
+    <div className={cx('container')}>
+      {cardsData.map((card, idx) => (
+        <Card
+          key={idx}
+          card={card}
+          index={idx}
+          onClick={() => handleCardClick(idx)}
+          isActive={clickedCards[idx]}
+        />
+      ))}
+      <MessageBox title={data.title}>
+        <div className={cx('txt-content')}>
+          {data.Interpretation}
+        </div>         
+        {cardsData.map((card, idx) =>(
+        <>
+          <div className={cx('txt-title')}>{card.cardName}</div>
+          <div className={cx('txt-content')}>{card.cardMeaning}</div>
+        </>
+        ))}          
+      </MessageBox>
+    </div>
   )
 }
 
@@ -73,6 +78,7 @@ function Card({
     const centerX = left - width / 2
     const centerY = top - height / 2
     const dot = Math.sqrt(centerX ** 2 + centerY ** 2)
+
     setXY({
       x: x,
       y: y,
@@ -88,6 +94,7 @@ function Card({
 
   const handleMouseLeave = (e: React.MouseEvent) => {
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+    
     setXY({
       x: x,
       y: y,
@@ -102,6 +109,7 @@ function Card({
   }
   // console.log(xy)
   // console.log(-xy?.centerY / 100,xy?.centerX / 100,0,xy?.dot / 8)
+
   return (
     <div className={cx('wrap-image')} onClick={onClick}>
       <div
@@ -111,14 +119,13 @@ function Card({
       >
         <div className={cx('front')}>
           <img src={card?.cardImageUrl} alt={`card ${index + 1}`} />
-          <MessageBox title={card.cardName} />
+          <div className={cx('front-txt')}>
+            <span>{card.cardName}</span>
+          </div>
         </div>
         <div
           className={cx('back')}
           style={{
-            width: '100%', // Make sure to use quotes around percentage values
-            maxWidth: '283px',
-            height: '500px',
             transform: `rotate3d(${-xy?.centerY / 70}, ${
               xy?.centerX / 70
             }, 0,25deg)`,
@@ -127,29 +134,13 @@ function Card({
               xy?.top
             }px, #00000040, #ffffff00, #ffffff99),
             url(${getImagePath(index)})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            // boxShadow: '0 0 10px 2px rgba(0, 0, 0, 0.1)',
-            position: 'relative',
-            transitionDuration: '250ms',
-            transitionProperty: 'transform, box-shadow',
-            transitionTimingFunction: 'ease-out',
             boxShadow: `${-xy.centerX / 5}px ${
               -xy.centerY / 10
             }px 10px rgba(0, 0, 0, 0.2)`,
-            borderRadius: '30px',
           }}
         ></div>
       </div>
     </div>
-  )
-}
-
-function Info({ data }: { data?: any }) {
-  return (
-    <MessageBox title="점쟁이" />
-    // <div>{data?.Interpretation}</div>)
   )
 }
 

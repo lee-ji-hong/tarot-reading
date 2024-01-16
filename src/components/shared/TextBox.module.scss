@@ -1,0 +1,28 @@
+.wrap-text-box {
+  display: flex;
+
+  border-radius: 2px;
+  padding: 12px 24px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  input {
+    height: 25px;
+    width: 85%;
+  }
+
+  button {
+    margin-left: 6px;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    height: 100%;
+    width: 60px;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+  }
+}

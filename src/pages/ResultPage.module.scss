@@ -6,6 +6,11 @@
   display: flex;
   justify-content: center;
   padding-top: 100px;
+
+  .txt-title{
+    color:red;
+    margin-top: 20px;
+  }
 }
 
 .wrap-image {
@@ -38,10 +43,20 @@
   .back {
     transform: rotateY(0deg);
     z-index: 2;
+    max-width: 283px;
+    height: 52vh;
+    position: relative;
+    transition-duration: 250ms;
+    transition-property: transform, box-shadow;
+    transition-timing-function: ease-out;
+    border-radius: 30px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
 
-    img {
-      width: 100%;
-      max-width: 283px;
+    &:hover {
+      box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -61,6 +76,14 @@
 
     &:hover img {
       transform: scale(1.1);
+    }
+
+    .front-txt{
+      margin-top: 20px;
+
+      span {
+        color:skyblue;
+      }
     }
   }
 }
