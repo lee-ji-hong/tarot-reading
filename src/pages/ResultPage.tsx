@@ -23,15 +23,24 @@ function ResultPage() {
 
   return (
     <div className={cx('container')}>
-      {cardsData.map((card, idx) => (
-        <Card
-          key={idx}
-          card={card}
-          index={idx}
-          onClick={() => handleCardClick(idx)}
-          isActive={clickedCards[idx]}
-        />
-      ))}
+      <video
+        className={cx('video-background')}
+        autoPlay={true}
+        muted={true}
+        loop={true}
+        // poster='/assets/poster.jpeg'
+      >
+        <source src='/assets/main.mp4' type='video/mp4'></source>
+      </video>
+        {cardsData.map((card, idx) => (
+          <Card
+            key={idx}
+            card={card}
+            index={idx}
+            onClick={() => handleCardClick(idx)}
+            isActive={clickedCards[idx]}
+          />
+        ))}
       <MessageBox title={data.title}>
         <div className={cx('txt-content')}>
           {data.Interpretation}

@@ -1,15 +1,28 @@
 .container {
-  background-image: url('../../public/assets/images/result.png');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding-top: 100px;
+  position: relative;
+  overflow: hidden;
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; 
+  }
 
   .txt-title{
     color:red;
     margin-top: 20px;
+  }
+  
+  .wrap-cards {
+    // display: flex;
+  }
+
+  @media (min-width: 600px) and (max-width: 900px) {
+    //
   }
 }
 
