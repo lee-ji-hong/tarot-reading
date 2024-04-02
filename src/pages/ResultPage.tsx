@@ -30,8 +30,9 @@ function ResultPage() {
         loop={true}
         // poster='/assets/poster.jpeg'
       >
-        <source src='/assets/main.mp4' type='video/mp4'></source>
+        <source src="/assets/main.mp4" type="video/mp4"></source>
       </video>
+      <div className={cx('wrap-image')}>
         {cardsData.map((card, idx) => (
           <Card
             key={idx}
@@ -41,16 +42,16 @@ function ResultPage() {
             isActive={clickedCards[idx]}
           />
         ))}
+      </div>
+
       <MessageBox title={data.title}>
-        <div className={cx('txt-content')}>
-          {data.Interpretation}
-        </div>         
-        {cardsData.map((card, idx) =>(
-        <>
-          <div className={cx('txt-title')}>{card.cardName}</div>
-          <div className={cx('txt-content')}>{card.cardMeaning}</div>
-        </>
-        ))}          
+        <div className={cx('txt-content')}>{data.Interpretation}</div>
+        {cardsData.map((card, idx) => (
+          <>
+            <div className={cx('txt-title')}>{card.cardName}</div>
+            <div className={cx('txt-content')}>{card.cardMeaning}</div>
+          </>
+        ))}
       </MessageBox>
     </div>
   )
@@ -103,7 +104,7 @@ function Card({
 
   const handleMouseLeave = (e: React.MouseEvent) => {
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
-    
+
     setXY({
       x: x,
       y: y,
@@ -120,35 +121,34 @@ function Card({
   // console.log(-xy?.centerY / 100,xy?.centerX / 100,0,xy?.dot / 8)
 
   return (
-    <div className={cx('wrap-image')} onClick={onClick}>
-      <div
-        className={cx('card', { active: isActive })}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className={cx('front')}>
-          <img src={card?.cardImageUrl} alt={`card ${index + 1}`} />
-          <div className={cx('front-txt')}>
-            <span>{card.cardName}</span>
-          </div>
+    <div
+      className={cx('card', { active: isActive })}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+    >
+      <div className={cx('front')}>
+        <img src={card?.cardImageUrl} alt={`card ${index + 1}`} />
+        <div className={cx('front-txt')}>
+          <span>{card.cardName}</span>
         </div>
-        <div
-          className={cx('back')}
-          style={{
-            transform: `rotate3d(${-xy?.centerY / 70}, ${
-              xy?.centerX / 70
-            }, 0,25deg)`,
-            backgroundImage: `            
-            radial-gradient(circle at ${xy?.left}px ${
-              xy?.top
-            }px, #00000040, #ffffff00, #ffffff99),
-            url(${getImagePath(index)})`,
-            boxShadow: `${-xy.centerX / 5}px ${
-              -xy.centerY / 10
-            }px 10px rgba(0, 0, 0, 0.2)`,
-          }}
-        ></div>
       </div>
+      <div
+        className={cx('back')}
+        style={{
+          transform: `rotate3d(${-xy?.centerY / 70}, ${
+            xy?.centerX / 70
+          }, 0,25deg)`,
+          backgroundImage: `            
+            radial-gradient(circle at ${xy?.left}px ${
+            xy?.top
+          }px, #00000040, #ffffff00, #ffffff99),
+            url(${getImagePath(index)})`,
+          boxShadow: `${-xy.centerX / 5}px ${
+            -xy.centerY / 10
+          }px 10px rgba(0, 0, 0, 0.2)`,
+        }}
+      ></div>
     </div>
   )
 }
